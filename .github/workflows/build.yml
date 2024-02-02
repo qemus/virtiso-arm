@@ -85,7 +85,8 @@ jobs:
             sudo find /tmp/iso -name "X86" -type d -exec rm -rf {} +
             sudo find /tmp/iso -name "x64" -type d -exec rm -rf {} +
             sudo find /tmp/iso -name "X64" -type d -exec rm -rf {} +
-            find . -type d -empty -delete
+            # Remove empty directories
+            sudo find . -type d -empty -delete
           fi
           echo & echo
           genisoimage -o /tmp/out.iso -r -iso-level 4 -input-charset iso8859-1 -V "virtio-win-${{ env.latest_tag }}" /tmp/iso
