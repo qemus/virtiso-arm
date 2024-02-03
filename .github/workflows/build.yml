@@ -90,11 +90,11 @@ jobs:
           fi
           echo & echo
           sudo mkdir -p /tmp/iso/ARM64/w11
-          sudo cp /tmp/iso/vioscsi/w11/ARM64/. /tmp/iso/ARM64/w11/
-          sudo cp /tmp/iso/viostor/w11/ARM64/. /tmp/iso/ARM64/w11/
+          sudo cp -r /tmp/iso/vioscsi/w11/ARM64/. /tmp/iso/ARM64/w11/
+          sudo cp -r /tmp/iso/viostor/w11/ARM64/. /tmp/iso/ARM64/w11/
           sudo mkdir -p /tmp/iso/ARM64/w10
-          sudo cp /tmp/iso/vioscsi/w10/ARM64/. /tmp/iso/ARM64/w10/
-          sudo cp /tmp/iso/viostor/w10/ARM64/. /tmp/iso/ARM64/w10/
+          sudo cp -r /tmp/iso/vioscsi/w10/ARM64/. /tmp/iso/ARM64/w10/
+          sudo cp -r /tmp/iso/viostor/w10/ARM64/. /tmp/iso/ARM64/w10/
           echo & echo
           genisoimage -o /tmp/out.iso -r -iso-level 4 -input-charset iso8859-1 -V "virtio-win-${{ env.latest_tag }}" /tmp/iso
           mv /tmp/out.iso /tmp/virtio-win-${{ env.latest_tag }}.iso
