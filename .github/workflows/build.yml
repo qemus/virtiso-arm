@@ -19,7 +19,7 @@ jobs:
       contents: read
     steps:
       - 
-        name: Get latest tag
+        name: Get latest version
         run: |
           #!/bin/bash
           url="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/"
@@ -67,7 +67,7 @@ jobs:
           cd /tmp/iso
           echo & echo
           if [[ ${strip,,} == "y" ]]; then
-            # Remove tools for different platforms
+            # Remove tools for other platforms
             sudo rm -rf /tmp/iso/i386
             sudo rm -rf /tmp/iso/guest-agent
             sudo rm -f /tmp/iso/virtio-win-gt-x86.msi
@@ -75,16 +75,11 @@ jobs:
             sudo rm -f /tmp/iso/virtio-win-guest-tools.exe
             sudo rm -f /tmp/iso/guest-agent/qemu-ga-i386.msi
             # Remove debug symbols
-            sudo find /tmp/iso -name "*.pdb" -type f -delete
-            sudo find /tmp/iso -name "*.PDB" -type f -delete
-            # Remove binaries
-            sudo find /tmp/iso -name "AMD64" -type d -exec  rm -rf {} +
-            sudo find /tmp/iso -name "Amd64" -type d -exec rm -rf {} +
-            sudo find /tmp/iso -name "amd64" -type d -exec rm -rf {} +
-            sudo find /tmp/iso -name "x86" -type d -exec rm -rf {} +
-            sudo find /tmp/iso -name "X86" -type d -exec rm -rf {} +
-            sudo find /tmp/iso -name "x64" -type d -exec rm -rf {} +
-            sudo find /tmp/iso -name "X64" -type d -exec rm -rf {} +
+            sudo find /tmp/iso -iname "*.pdb" -type f -delete
+            # Remove binaries for other platforms
+            sudo find /tmp/iso -iname "x64" -type d -exec rm -rf {} +
+            sudo find /tmp/iso -iname "x86" -type d -exec rm -rf {} +            
+            sudo find /tmp/iso -iname "amd64" -type d -exec rm -rf {} +
             # Remove empty directories
             sudo find . -type d -empty -delete
           fi
