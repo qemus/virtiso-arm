@@ -91,9 +91,9 @@ jobs:
           sudo cp -r /tmp/iso/vioscsi/w10/ARM64/. /tmp/iso/ARM64/w10/
           sudo cp -r /tmp/iso/viostor/w10/ARM64/. /tmp/iso/ARM64/w10/
           echo & echo
-          tar -cvzf /tmp/virtio-win-${{ env.latest_tag }}.tar.gz /tmp/iso >/dev/null
+          tar -C /tmp/iso -cvzf /tmp/virtio-win-${{ env.latest_tag }}.tar.gz * >/dev/null
           echo & echo
-          XZ_OPT=-9 tar -Jcvf /tmp/virtio-win-${{ env.latest_tag }}.tar.xz /tmp/iso >/dev/null         
+          XZ_OPT=-9 tar -C /tmp/iso -Jcvf /tmp/virtio-win-${{ env.latest_tag }}.tar.xz * >/dev/null         
           echo & echo
           genisoimage -o /tmp/virtio-win-${{ env.latest_tag }}.iso -r -iso-level 4 -input-charset iso8859-1 -V "virtio-win-${{ env.latest_tag }}" /tmp/iso
       -
