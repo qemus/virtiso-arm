@@ -1,4 +1,4 @@
-<h1 align="center">Virtiso ARM<br />
+<h1 align="center">VirtISO ARM<br />
 <div align="center">
 <a href="https://github.com/qemus/virtiso-arm"><img src="https://github.com/qemus/virtiso-arm/raw/master/.github/logo.png" title="Logo" style="max-width:100%;" width="128" /></a>
 </div>
