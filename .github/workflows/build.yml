@@ -53,44 +53,56 @@ jobs:
            echo "exists=false" >> $GITHUB_ENV
           fi
       -
-        name: Build minified ISO
+        name: Process Fedora drivers
         if: env.exists == 'false'
-        id: version
+        id: fedora
         run: |
           #!/bin/bash
-          strip="y"
           sudo apt install genisoimage libarchive-tools
-          rm -f /tmp/latest.iso
           wget "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-${{ env.latest_tag }}-1/virtio-win-${{ env.latest_tag }}.iso" -O "/tmp/latest.iso" -q
           rm -rf /tmp/iso && mkdir /tmp/iso
           bsdtar -xf "/tmp/latest.iso" -C /tmp/iso/
+      -
+        name:  Strip unnecessary bloat
+        if: env.exists == 'false'
+        id: strip
+        run: |
+          #!/bin/bash
           cd /tmp/iso
-          echo & echo
-          if [[ ${strip,,} == "y" ]]; then
-            # Remove tools for other platforms
-            sudo rm -rf /tmp/iso/i386
-            sudo rm -rf /tmp/iso/guest-agent
-            sudo rm -f /tmp/iso/virtio-win-gt-x86.msi
-            sudo rm -f /tmp/iso/virtio-win-gt-x64.msi
-            sudo rm -f /tmp/iso/virtio-win-guest-tools.exe
-            sudo rm -f /tmp/iso/guest-agent/qemu-ga-i386.msi
-            # Remove debug symbols
-            sudo find /tmp/iso -iname "*.pdb" -type f -delete
-            # Remove binaries for other platforms
-            sudo find /tmp/iso -iname "x64" -type d -exec rm -rf {} +
-            sudo find /tmp/iso -iname "x86" -type d -exec rm -rf {} +            
-            sudo find /tmp/iso -iname "amd64" -type d -exec rm -rf {} +
-            # Remove empty directories
-            sudo find . -type d -empty -delete
-          fi
-          echo & echo
-          sudo mkdir -p /tmp/iso/ARM64/w11
-          sudo cp -r /tmp/iso/vioscsi/w11/ARM64/. /tmp/iso/ARM64/w11/
-          sudo cp -r /tmp/iso/viostor/w11/ARM64/. /tmp/iso/ARM64/w11/
-          sudo mkdir -p /tmp/iso/ARM64/w10
-          sudo cp -r /tmp/iso/vioscsi/w10/ARM64/. /tmp/iso/ARM64/w10/
-          sudo cp -r /tmp/iso/viostor/w10/ARM64/. /tmp/iso/ARM64/w10/
-          echo & echo
+          # Remove tools for other platforms
+          sudo rm -rf /tmp/iso/i386
+          sudo rm -rf /tmp/iso/guest-agent
+          sudo rm -f /tmp/iso/virtio-win-gt-x86.msi
+          sudo rm -f /tmp/iso/virtio-win-gt-x64.msi
+          sudo rm -f /tmp/iso/virtio-win-guest-tools.exe
+          sudo rm -f /tmp/iso/guest-agent/qemu-ga-i386.msi
+          # Remove debug symbols
+          sudo find /tmp/iso -iname "*.pdb" -type f -delete
+          # Remove binaries for other platforms
+          sudo find /tmp/iso -iname "x64" -type d -exec rm -rf {} +
+          sudo find /tmp/iso -iname "x86" -type d -exec rm -rf {} +            
+          sudo find /tmp/iso -iname "amd64" -type d -exec rm -rf {} +
+          # Remove empty directories
+          sudo find . -type d -empty -delete
+      -
+        name: Add missing hardlinks
+        if: env.exists == 'false'
+        id: legacy
+        run: |
+          #!/bin/bash
+          mkdir -p /tmp/iso/ARM64
+          cd /tmp/iso/ARM64
+          sudo cp -lr /tmp/iso/vioscsi/w11/ARM64 w11
+          sudo cp -lr /tmp/iso/viostor/w11/ARM64 w11
+          sudo cp -lr /tmp/iso/vioscsi/w10/ARM64 w10
+          sudo cp -lr /tmp/iso/viostor/w10/ARM64 w10
+      -
+        name: Build minified ISO
+        if: env.exists == 'false'
+        id: build
+        run: |
+          #!/bin/bash
+          cd /tmp/iso
           tar -C /tmp/iso -cvzf /tmp/virtio-win-${{ env.latest_tag }}.tar.gz * >/dev/null
           echo & echo
           XZ_OPT=-9 tar -C /tmp/iso -Jcvf /tmp/virtio-win-${{ env.latest_tag }}.tar.xz * >/dev/null         
@@ -131,4 +143,3 @@ jobs:
               The build job of ${{ github.event.repository.name }} v${{ env.latest_tag }} was completed successfully! 
               
               See https://github.com/${{ github.repository }}/actions for more information.
-
