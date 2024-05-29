@@ -6,13 +6,13 @@
   
   [![Build](https://github.com/qemus/virtiso-arm/actions/workflows/build.yml/badge.svg)](https://github.com/qemus/virtiso-arm/)
   [![Version](https://img.shields.io/github/v/tag/qemus/virtiso-arm?label=version&sort=semver&color=066da5)](https://github.com/qemus/virtiso-arm/releases)
-  [![Size](https://img.shields.io/badge/size-3.5_MB-steelblue?style=flat&color=066da5)](https://github.com/qemus/virtiso-arm/releases)
+  [![Size](https://img.shields.io/badge/size-6.29_MB-steelblue?style=flat&color=066da5)](https://github.com/qemus/virtiso-arm/releases)
   
 </div></h1>
 
-VirtISO is a slim image of the KVM/QEMU Virtio drivers for Windows ARM guests.
+VirtISO is a slim image of the KVM/QEMU VirtIO drivers for Windows ARM guests.
 
-It minimizes the [official ISO](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/) from 700 MB to just 3 MB in size.
+It minimizes the [official ISO](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/) from 700 MB to just 6 MB in size.
 
 # Methods used
 
@@ -24,7 +24,7 @@ It minimizes the [official ISO](https://fedorapeople.org/groups/virt/virtio-win/
 
   It contains every ARM64 driver the official image has, so there is zero loss of functionality.
 
-  See also [Virtiso x86](https://github.com/qemus/virtiso-x86/) if you need x86 drivers and [Virtiso x64](https://github.com/qemus/virtiso/) for AMD64 drivers.
+  See also [VirtISO x86](https://github.com/qemus/virtiso-x86/) if you need x86 drivers and [VirtISO x64](https://github.com/qemus/virtiso/) for AMD64 drivers.
 
 # Stars
 [![Stars](https://starchart.cc/qemus/virtiso-arm.svg?variant=adaptive)](https://starchart.cc/qemus/virtiso-arm)
