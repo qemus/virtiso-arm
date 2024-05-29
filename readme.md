@@ -12,7 +12,7 @@
 
 Virtiso is a slim image of the KVM/QEMU Virtio drivers for Windows ARM guests.
 
-It minimizes the [official ISO](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/) of 600 MB to just 3 MB in size.
+It minimizes the [official ISO](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/) from 700 MB to just 3 MB in size.
 
 # Methods used
 
