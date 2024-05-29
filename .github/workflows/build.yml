@@ -92,10 +92,12 @@ jobs:
           #!/bin/bash
           cd /tmp/iso
           mkdir -p /tmp/iso/ARM64
-          sudo cp -lr vioscsi/w11/ARM64/. w11
-          sudo cp -lr viostor/w11/ARM64/. w11
-          sudo cp -lr vioscsi/w10/ARM64/. w10
-          sudo cp -lr viostor/w10/ARM64/. w10
+          mkdir w10
+          mkdir w11
+          sudo cp -lr vioscsi/w11/ARM64/. w11/
+          sudo cp -lr viostor/w11/ARM64/. w11/
+          sudo cp -lr vioscsi/w10/ARM64/. w10/
+          sudo cp -lr viostor/w10/ARM64/. w10/
       -
         name: Build minified ISO
         if: env.exists == 'false'
