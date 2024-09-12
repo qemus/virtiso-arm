@@ -58,7 +58,7 @@ jobs:
         id: fedora
         run: |
           #!/bin/bash
-          sudo apt install genisoimage libarchive-tools
+          sudo apt install rdfind genisoimage libarchive-tools
           url="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-${{ env.latest_tag }}/virtio-win-$base.iso"
           wget "$url" -O "/tmp/latest.iso" -q
           rm -rf /tmp/iso && mkdir /tmp/iso
@@ -94,10 +94,17 @@ jobs:
           cd /tmp/iso
           mkdir -p /tmp/iso/ARM64/w10
           mkdir -p /tmp/iso/ARM64/w11
-          sudo cp -lr vioscsi/w11/ARM64/. ARM64/w11/
-          sudo cp -lr viostor/w11/ARM64/. ARM64/w11/
-          sudo cp -lr vioscsi/w10/ARM64/. ARM64/w10/
-          sudo cp -lr viostor/w10/ARM64/. ARM64/w10/
+          sudo cp -lpr vioscsi/w11/ARM64/. ARM64/w11/
+          sudo cp -lpr viostor/w11/ARM64/. ARM64/w11/
+          sudo cp -lpr vioscsi/w10/ARM64/. ARM64/w10/
+          sudo cp -lpr viostor/w10/ARM64/. ARM64/w10/
+      -
+        name: Create symbolic links
+        if: env.exists == 'false'
+        id: symlinks
+        run: |
+          #!/bin/bash
+          sudo rdfind -makehardlinks true /tmp/iso/
       -
         name: Build minified ISO
         if: env.exists == 'false'
