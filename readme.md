@@ -5,7 +5,7 @@
 <div align="center">
   
   [![Build](https://github.com/qemus/virtiso-arm/actions/workflows/build.yml/badge.svg)](https://github.com/qemus/virtiso-arm/)
-  [![Version](https://img.shields.io/github/v/tag/qemus/virtiso-arm?label=version&sort=semver&color=066da5)](https://github.com/qemus/virtiso-arm/releases)
+  [![Version](https://img.shields.io/github/v/release/qemus/virtiso-arm?label=version&sort=semver&display_name=release&color=066da5)](https://github.com/qemus/virtiso-arm/releases)
   [![Size](https://img.shields.io/badge/size-5.95_MB-steelblue?style=flat&color=066da5)](https://github.com/qemus/virtiso-arm/releases)
   
 </div></h1>
