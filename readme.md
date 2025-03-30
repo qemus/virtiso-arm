@@ -10,7 +10,7 @@
   
 </div></h1>
 
-VirtISO is a slim image of the VirtIO drivers for Windows ARM guests.
+VirtISO is a slim image of the VirtIO drivers for Windows ARM64 guests.
 
 It minimizes the [official ISO](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/) from 700 MB to just 6 MB in size.
 
