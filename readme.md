@@ -10,7 +10,7 @@
   
 </div></h1>
 
-VirtISO is a slim image of the VirtIO drivers for Windows ARM64 guests.
+VirtISO is a slim image of the VirtIO drivers for Windows ARM64 guests as provided by Fedora.
 
 It minimizes the [official ISO](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/) from 700 MB to just 6 MB in size.
 
@@ -29,7 +29,7 @@ It minimizes the [official ISO](https://fedorapeople.org/groups/virt/virtio-win/
   It contains every ARM64 driver the official image has, so there is zero loss of functionality.
 
 > [!TIP]
-> See also [VirtISO WHQL](https://github.com/qemus/virtiso-whql/) if you need signed drivers, [VirtISO x64](https://github.com/qemus/virtiso/) for x64 drivers and [VirtISO x86](https://github.com/qemus/virtiso-x86/) for x86 drivers.
+> See also [VirtISO x64](https://github.com/qemus/virtiso/) for x64 drivers, [VirtISO WHQL](https://github.com/qemus/virtiso-whql/) for WHQL certified drivers, and [VirtISO x86](https://github.com/qemus/virtiso-x86/) for x86 drivers.
 
 # Stars 🌟
 [![Stars](https://starchart.cc/qemus/virtiso-arm.svg?variant=adaptive)](https://starchart.cc/qemus/virtiso-arm)
