@@ -82,10 +82,11 @@ jobs:
           sudo find /tmp/iso -iname "*.pdb" -type f -delete
           # Remove binaries for other platforms
           sudo find /tmp/iso -iname "x64" -type d -exec rm -rf {} +
-          sudo find /tmp/iso -iname "x86" -type d -exec rm -rf {} +            
+          sudo find /tmp/iso -iname "x86" -type d -exec rm -rf {} +
           sudo find /tmp/iso -iname "amd64" -type d -exec rm -rf {} +
-          # Remove buggy drivers (temporarily)
-          sudo find /tmp/iso -iname "pvpanic" -type d -exec rm -rf {} +            
+          # Remove drivers that prevent windows install (temporarily)
+          sudo find /tmp/iso -iname "viofs" -type d -exec rm -rf {} +
+          sudo find /tmp/iso -iname "pvpanic" -type d -exec rm -rf {} +
           # Remove empty directories
           sudo find . -type d -empty -delete
       -
