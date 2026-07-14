@@ -213,6 +213,50 @@ jobs:
           find /tmp/iso -depth -type d -empty -delete
           EOF
       -
+        name: Verify driver folders
+        if: env.exists == 'false'
+        id: verify
+        run: |
+          #!/usr/bin/env bash
+          set -Eeuo pipefail
+
+          missing="/tmp/missing-driver-folders.txt"
+          : > "$missing"
+
+          while IFS=: read -r driver versions; do
+            [ -n "$driver" ] || continue
+
+            for version in $versions; do
+              path="/tmp/iso/$driver/$version"
+
+              if [ ! -d "$path" ]; then
+                echo "$driver/$version" >> "$missing"
+              fi
+            done
+          done <<'EOF'
+          ARM64:w10 w11
+          Balloon:w10 w11 2k25
+          NetKVM:w10 w11 2k25
+          viogpudo:w10 w11 2k25
+          vioinput:w10 w11 2k25
+          viomem:w10 w11 2k25
+          viorng:w10 w11 2k25
+          vioscsi:w10 w11 2k25
+          vioserial:w10 w11 2k25
+          viostor:w10 w11 2k25
+          EOF
+
+          if [ -s "$missing" ]; then
+            echo "ERROR: Previously available driver folders are missing:" >&2
+            sed 's/^/  - /' "$missing" >&2
+            echo >&2
+            echo "The upstream package may have dropped ARM64 Windows drivers." >&2
+            echo "Review the missing folders before publishing this release." >&2
+            exit 1
+          fi
+
+          echo "All expected driver folders are present."
+      -
         name: Generate release notes
         if: env.exists == 'false'
         id: notes
