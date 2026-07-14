@@ -24,7 +24,7 @@ VirtISO is a slim image of the VirtIO drivers for Windows ARM64 guests as provid
 
 # Download
 
-  You can download the [latest version](https://github.com/qemus/virtiso-arm/releases/download/v0.1.285-1/virtio-win-0.1.285.iso) from the [Releases](https://github.com/qemus/virtiso-arm/releases) page.
+  You can download the [latest version](https://github.com/qemus/virtiso-arm/releases/latest/download/virtio-win.iso) from the [Releases](https://github.com/qemus/virtiso-arm/releases) page.
 
 # Usage 🚀
 
